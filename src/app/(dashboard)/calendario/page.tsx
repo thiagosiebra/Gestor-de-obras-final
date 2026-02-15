@@ -47,6 +47,7 @@ export default function CalendarPage() {
             if (t.date !== dateStr) return false;
             if (isAdmin) return true;
             if (t.isGlobal) return true;
+            if (t.assignedTo === 'all') return true;
             return t.assignedTo === currentEmployee?.id;
         });
 

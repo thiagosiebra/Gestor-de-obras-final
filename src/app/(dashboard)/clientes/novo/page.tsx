@@ -1,4 +1,5 @@
 'use client';
+// Client creation form updated
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -6,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { useApp } from '@/lib/context';
+import { deduplicateAddress } from '@/lib/utils';
 import styles from '../page.module.css';
 
 export default function NewClientPage() {
@@ -17,7 +19,6 @@ export default function NewClientPage() {
         name: '',
         nif: '',
         contactPerson: '',
-        role: '',
         email: '',
         phone: '',
         address: '',
@@ -30,12 +31,12 @@ export default function NewClientPage() {
         setFormData({ ...formData, [e.target.id]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
 
-        setTimeout(() => {
-            addClient({
+        try {
+            await addClient({
                 name: formData.name,
                 nif: formData.nif,
                 contactPerson: formData.contactPerson,
@@ -45,9 +46,13 @@ export default function NewClientPage() {
                 city: formData.city,
                 status: 'Activo'
             });
-            setIsLoading(false);
             router.push('/clientes');
-        }, 1000);
+        } catch (error: any) {
+            console.error('Error adding client:', error);
+            alert(`Error al guardar el cliente: ${error.message || 'Error desconocido'}`);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -87,12 +92,6 @@ export default function NewClientPage() {
                             onChange={handleChange}
                             required
                         />
-                        <Input
-                            id="role"
-                            label="Cargo del Contacto"
-                            value={formData.role}
-                            onChange={handleChange}
-                        />
                     </div>
 
                     <h3 style={{ color: 'var(--text-primary)', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '16px' }}>
@@ -131,17 +130,20 @@ export default function NewClientPage() {
                                             const valLower = val.toLowerCase();
                                             let suggestions: string[] = [];
 
+                                            const naronSuffix = '15570 Narón, A Coruña, España';
+                                            const corunaSuffix = 'A Coruña, España';
+
                                             // Handle A Coruña and nearby areas specifically
                                             if (valLower.includes('coru') || valLower.includes('coruña') || valLower.includes('naron') || valLower.includes('ferrol')) {
                                                 if (valLower.includes('naron')) {
                                                     suggestions = [
-                                                        `${val}, 15570 Narón, A Coruña, España`,
-                                                        `Rúa da Finca Federico, 6, 15570 Narón, A Coruña, España`,
+                                                        valLower.includes('naron') && valLower.includes('15570') ? val : `${val}, ${naronSuffix}`,
+                                                        `Rúa da Finca Federico, 6, ${naronSuffix}`,
                                                         `Estrada de Castela, Narón, A Coruña, España`
                                                     ];
                                                 } else {
                                                     suggestions = [
-                                                        `${val}, A Coruña, España`,
+                                                        valLower.includes('coruña') && valLower.includes('españa') ? val : `${val}, ${corunaSuffix}`,
                                                         `Rúa de San Andrés, 15003 A Coruña, España`,
                                                         `Paseo Marítimo, 15002 A Coruña, España`,
                                                         `Avenida de la Marina, 15001 A Coruña, España`
@@ -149,10 +151,10 @@ export default function NewClientPage() {
                                                 }
                                             } else {
                                                 suggestions = [
+                                                    val.includes('España') ? val : `${val}, España`,
                                                     `${val}, A Coruña, España`,
                                                     `${val}, Madrid, España`,
-                                                    `${val}, Barcelona, España`,
-                                                    `${val}, Valencia, España`
+                                                    `${val}, Barcelona, España`
                                                 ];
                                             }
                                             setAddressSuggestions(suggestions.slice(0, 5));
@@ -185,7 +187,7 @@ export default function NewClientPage() {
                                                             cityFound = parts[parts.length - 2];
                                                         }
                                                     }
-                                                    setFormData({ ...formData, address: s, city: cityFound });
+                                                    setFormData({ ...formData, address: deduplicateAddress(s), city: cityFound });
                                                     setAddressSuggestions([]);
                                                 }}
                                                 style={{

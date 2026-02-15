@@ -6,6 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useApp, Budget, BudgetItem, Client, Service, ProjectPhoto, Work, Invoice } from '@/lib/context';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { deduplicateAddress } from '@/lib/utils';
 import styles from '../novo/page.module.css'; // Reuse novo styles
 
 export default function BudgetDetailsPage() {
@@ -110,23 +111,46 @@ export default function BudgetDetailsPage() {
         });
     };
 
-    const handleSave = (e?: React.FormEvent) => {
+    const handleSave = async (e?: React.FormEvent) => {
         if (e) e.preventDefault();
         if (!formData) return;
 
         setIsLoading(true);
-        const finalData = {
-            ...formData,
-            nonRegisteredClient: isNewClient ? tempClient : undefined,
-            clientName: isNewClient ? tempClient.name : formData.clientName
-        };
 
-        setTimeout(() => {
-            updateBudget(id, finalData);
+        try {
+            let finalClientId = formData.clientId;
+
+            // Register new client if saving in edit mode
+            if (isNewClient && tempClient.name) {
+                finalClientId = await addClient({
+                    name: tempClient.name,
+                    email: tempClient.email,
+                    phone: tempClient.phone,
+                    address: tempClient.address,
+                    city: '',
+                    nif: tempClient.nif,
+                    contactPerson: tempClient.name,
+                    status: 'Activo'
+                });
+            }
+
+            const finalData = {
+                ...formData,
+                clientId: finalClientId,
+                nonRegisteredClient: undefined, // Clear after registration
+                clientName: isNewClient ? tempClient.name : formData.clientName
+            } as Budget;
+
+            await updateBudget(id, finalData);
             setFormData(finalData);
-            setIsLoading(false);
+            setIsNewClient(false);
             setPreviewMode(true);
-        }, 800);
+        } catch (error) {
+            console.error('Error updating budget:', error);
+            alert('Error al guardar el presupuesto.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handlePrint = () => {
@@ -182,33 +206,36 @@ export default function BudgetDetailsPage() {
         }, 800);
     };
 
-    const handleGenerateInvoice = () => {
+    const handleGenerateInvoice = async () => {
         if (!formData) return;
 
         setIsLoading(true);
+        try {
+            const newInvoiceId = await addInvoice({
+                clientId: formData.clientId,
+                nonRegisteredClient: formData.nonRegisteredClient,
+                clientName: formData.clientName,
+                date: new Date().toISOString().split('T')[0],
+                dueDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 15 days
+                concept: formData.concept,
+                items: formData.items,
+                paymentInstructions: formData.paymentInstructions,
+                depositType: formData.depositType,
+                depositValue: formData.depositValue,
+                plannedStartDate: formData.plannedStartDate,
+                comments: formData.comments,
+                terms: formData.terms,
+                status: 'Emitida',
+                budgetId: id
+            });
 
-        const newInvoiceId = addInvoice({
-            clientId: formData.clientId,
-            nonRegisteredClient: formData.nonRegisteredClient,
-            clientName: formData.clientName,
-            date: new Date().toISOString().split('T')[0],
-            dueDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 15 days
-            concept: formData.concept,
-            items: formData.items,
-            paymentInstructions: formData.paymentInstructions,
-            depositType: formData.depositType,
-            depositValue: formData.depositValue,
-            plannedStartDate: formData.plannedStartDate,
-            comments: formData.comments,
-            terms: formData.terms,
-            status: 'Emitida',
-            budgetId: id
-        });
-
-        setTimeout(() => {
-            setIsLoading(false);
             router.push(`/facturas/${newInvoiceId}`);
-        }, 800);
+        } catch (error) {
+            console.error('Error generating invoice:', error);
+            alert('Error al generar la factura.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const renderPreview = () => (
@@ -222,8 +249,8 @@ export default function BudgetDetailsPage() {
                         <div className={styles.logoImg}>
                             <div className={styles.logoIconContainer}>🖌️</div>
                             <div className={styles.logoTextContainer}>
-                                <span className={styles.mainLogo}>VILANOVA PINTURAS</span>
-                                <span className={styles.subLogo}>& SERVICIOS</span>
+                                <span className={styles.mainLogo}>{settings.companyName.toUpperCase()}</span>
+                                <span className={styles.subLogo}>SISTEMA DE GESTIÓN</span>
                             </div>
                         </div>
                     )}
@@ -266,7 +293,7 @@ export default function BudgetDetailsPage() {
                     <span className={styles.targetLabel}>Para:</span>
                     <div className={styles.clientBox}>
                         <strong>{formData.nonRegisteredClient?.name || (clients.find(c => c.id === formData.clientId)?.name || 'Cliente')}</strong>
-                        <p>{formData.nonRegisteredClient?.address || clients.find(c => c.id === formData.clientId)?.address}</p>
+                        <p>{deduplicateAddress(formData.nonRegisteredClient?.address || clients.find(c => c.id === formData.clientId)?.address || '')}</p>
                         <p>CIF/NIF: {formData.nonRegisteredClient?.nif || clients.find(c => c.id === formData.clientId)?.nif}</p>
                         <p>Tlf: {formData.nonRegisteredClient?.phone || clients.find(c => c.id === formData.clientId)?.phone}</p>
                         <p>Email: {formData.nonRegisteredClient?.email || clients.find(c => c.id === formData.clientId)?.email}</p>

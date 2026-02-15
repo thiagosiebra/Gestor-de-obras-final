@@ -100,7 +100,7 @@ export default function IngresosPage() {
         <div className={styles.container}>
             <header className={styles.header}>
                 <div>
-                    <h1 className={styles.title}>Panel de Ingressos</h1>
+                    <h1 className={styles.title}>Panel de Ingresos</h1>
                     <p className={styles.subtitle}>Gestión financiera y seguimiento de cobros</p>
                 </div>
             </header>
@@ -109,28 +109,28 @@ export default function IngresosPage() {
                 <div className={`${styles.statCard} glass-panel`}>
                     <span className={styles.statIcon}>📈</span>
                     <div className={styles.statInfo}>
-                        <label>Faturamento Bruto</label>
+                        <label>Facturación Bruta</label>
                         <strong>€&nbsp;{stats.totalInvoiced.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</strong>
                     </div>
                 </div>
                 <div className={`${styles.statCard} glass-panel`}>
                     <span className={styles.statIcon} style={{ background: 'rgba(0, 200, 83, 0.1)', color: '#00c853' }}>💰</span>
                     <div className={styles.statInfo}>
-                        <label>Dinheiro em Caixa</label>
+                        <label>Dinero en Caja</label>
                         <strong style={{ color: '#00c853' }}>€&nbsp;{stats.totalPaid.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</strong>
                     </div>
                 </div>
                 <div className={`${styles.statCard} glass-panel`}>
                     <span className={styles.statIcon} style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>⏳</span>
                     <div className={styles.statInfo}>
-                        <label>Total a Receber</label>
+                        <label>Total a Cobrar</label>
                         <strong style={{ color: '#3b82f6' }}>€&nbsp;{stats.totalPending.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</strong>
                     </div>
                 </div>
                 <div className={`${styles.statCard} glass-panel`}>
                     <span className={styles.statIcon} style={{ background: 'rgba(255, 214, 0, 0.1)', color: '#ffd600' }}>🎯</span>
                     <div className={styles.statInfo}>
-                        <label>Taxa de Cobrança</label>
+                        <label>Tasa de Cobro</label>
                         <strong style={{ color: '#ffd600' }}>{stats.collectionRate.toFixed(1)}%</strong>
                     </div>
                 </div>
@@ -138,7 +138,7 @@ export default function IngresosPage() {
 
             <div className={styles.mainGrid}>
                 <div className={`${styles.chartSection} glass-panel`}>
-                    <h3 className={styles.sectionTitle}>📊 Fluxo de Caixa (Últimos 6 Meses)</h3>
+                    <h3 className={styles.sectionTitle}>📊 Flujo de Caja (Últimos 6 Meses)</h3>
                     <div className={styles.chartContainer}>
                         {monthlyData.map((data, idx) => (
                             <div key={idx} className={styles.barWrapper}>
@@ -156,7 +156,7 @@ export default function IngresosPage() {
                 </div>
 
                 <div className={`${styles.distributionSection} glass-panel`}>
-                    <h3 className={styles.sectionTitle}>🤝 Maiores Clientes</h3>
+                    <h3 className={styles.sectionTitle}>🤝 Mayores Clientes</h3>
                     <div className={styles.clientList}>
                         {clientDistribution.map(([name, value], idx) => (
                             <div key={idx} className={styles.clientRow}>
@@ -172,14 +172,14 @@ export default function IngresosPage() {
                                 <span className={styles.clientValue}>€&nbsp;{value.toLocaleString()}</span>
                             </div>
                         ))}
-                        {clientDistribution.length === 0 && <p className={styles.emptyText}>Sem faturamento registrado.</p>}
+                        {clientDistribution.length === 0 && <p className={styles.emptyText}>Sin facturación registrada.</p>}
                     </div>
                 </div>
             </div>
 
             <div className={`${styles.overdueSection} glass-panel`}>
                 <div className={styles.overdueHeader}>
-                    <h3 className={styles.sectionTitle}>🚨 Cobranças em Atraso</h3>
+                    <h3 className={styles.sectionTitle}>🚨 Cobros en Atraso</h3>
                     <span className={styles.badge}>{overdueInvoices.length} facturas</span>
                 </div>
                 {overdueInvoices.length > 0 ? (
@@ -188,7 +188,7 @@ export default function IngresosPage() {
                             <div key={inv.id} className={styles.overdueCard}>
                                 <div className={styles.overdueInfo}>
                                     <strong>{inv.clientName}</strong>
-                                    <span>#{inv.number} • Venceu há {inv.diffDays} dias</span>
+                                    <span>#{inv.number} • Venció hace {inv.diffDays} días</span>
                                 </div>
                                 <div className={styles.overdueAction}>
                                     <div className={styles.overdueAmount}>€&nbsp;{inv.total.toLocaleString()}</div>
@@ -197,7 +197,7 @@ export default function IngresosPage() {
                                         onClick={() => handleWhatsAppRemind(inv)}
                                         style={{ fontSize: '0.8rem', padding: '6px 12px' }}
                                     >
-                                        📲 Lembrar
+                                        📲 Recordar
                                     </Button>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@ export default function IngresosPage() {
                 ) : (
                     <div className={styles.noOverdue}>
                         <span className={styles.checkIcon}>✅</span>
-                        <p>Parabéns! Não existem cobranças em atraso no momento.</p>
+                        <p>¡Vaya suerte! No existen cobros en atraso en este momento.</p>
                     </div>
                 )}
             </div>

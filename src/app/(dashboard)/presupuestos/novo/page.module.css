@@ -1,5 +1,8 @@
 .container {
-    animation: fadeIn 0.4s ease-out;
+    padding: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
 }
 
 .header {
@@ -10,19 +13,17 @@
 }
 
 .title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    background: linear-gradient(45deg, #fff, #94a3b8);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.02em;
 }
 
 .mainGrid {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 400px 1fr;
     gap: 32px;
+    align-items: start;
 }
 
 .sidebarColumn {
@@ -38,14 +39,21 @@
 }
 
 .card {
+    background: rgba(17, 25, 40, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
     padding: 24px;
 }
 
 .cardTitle {
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 20px;
-    color: var(--text-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .cardHeaderFlex {
@@ -59,17 +67,6 @@
     margin-bottom: 0;
 }
 
-.toggleBtn {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    color: #60a5fa;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    font-weight: 600;
-}
-
 .inputGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -79,112 +76,123 @@
 .fieldWrapper {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .label {
     font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-secondary);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .select,
-.textarea {
-    padding: 12px;
-    border-radius: 8px;
-    background: var(--bg-secondary);
-    color: white;
-    border: 1px solid var(--border-subtle);
+.textarea,
+.modalInput,
+.modalTextarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #fff;
     font-size: 1rem;
+    outline: none;
     transition: all 0.2s;
+    width: 100%;
+}
+
+.select option {
+    background-color: #1a2233;
+    color: #fff;
+    padding: 12px;
+}
+
+.select:focus,
+.textarea:focus {
+    border-color: var(--primary-color, #3b82f6);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .textarea {
     min-height: 100px;
     resize: vertical;
     width: 100%;
-    font-family: inherit;
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .itemRow {
     background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
     padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    position: relative;
-    border: 1px solid var(--border-subtle);
+    gap: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .productSearchRow {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed var(--border-subtle);
-}
-
-.itemMain {
-    flex: 1;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .itemQuantities {
-    display: flex;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 16px;
     align-items: flex-end;
 }
 
 .removeBtn {
     background: rgba(239, 68, 68, 0.1);
-    color: #f87171;
+    color: #ef4444;
     border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.2rem;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     transition: all 0.2s;
 }
 
 .removeBtn:hover {
     background: #ef4444;
-    color: white;
+    color: #fff;
 }
 
 .totalsSection {
     margin-top: 32px;
     padding-top: 24px;
-    border-top: 1px solid var(--border-subtle);
+    border-top: 2px solid rgba(255, 255, 255, 0.05);
     display: flex;
     justify-content: flex-end;
 }
 
 .totalsTable {
     width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 }
 
 .totalRow {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    /* Vertical centering */
+    padding: 8px 0;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 1rem;
 }
 
 .grandTotal {
-    font-size: 1.2rem;
-    /* Reduced from 1.5rem */
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
     font-weight: 800;
-    color: var(--primary-color);
-    margin-top: 8px;
-    padding-top: 16px;
-    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.4rem;
 }
 
 .formActions {
@@ -193,52 +201,49 @@
     margin-top: 24px;
 }
 
-/* PREVIEW MODE STYLES */
+/* PREVIEW STYLES (A4 LOOK) */
 .previewContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
-    padding-bottom: 100px;
+    gap: 20px;
+    padding-bottom: 60px;
 }
 
 .budgetPaper {
-    width: 210mm;
-    min-height: 297mm;
     background: white;
+    width: 210mm;
+    min-height: 280mm;
+    padding: 20mm 15mm 20mm 15mm;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
     color: #1a1a1a;
-    padding: 1.5cm;
-    /* Reduced from 2.5cm */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    font-family: 'Inter', system-ui, sans-serif;
     border-radius: 4px;
-    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     position: relative;
 }
 
 .previewHeaderLogo {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 25px;
-    /* Reduced from 40px */
 }
 
 .logoImg {
     display: flex;
     align-items: center;
-    gap: 15px;
-}
-
-.logoImgPreview {
-    max-height: 120px;
-    /* Reduced from 180px */
-    max-width: 100%;
-    object-fit: contain;
+    gap: 12px;
 }
 
 .logoIconContainer {
-    font-size: 4rem;
-    /* Reduced from 6rem */
-    color: #2e7d32;
+    width: 48px;
+    height: 48px;
+    background: #1a1a1a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.8rem;
 }
 
 .logoTextContainer {
@@ -247,40 +252,35 @@
 }
 
 .mainLogo {
-    font-size: 2.5rem;
-    /* Reduced from 3.5rem */
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: #1b5e20;
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1;
 }
 
 .subLogo {
-    font-size: 1.4rem;
-    /* Reduced from 1.8rem */
-    font-weight: 600;
-    letter-spacing: 4px;
-    color: #757575;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: #666;
+    margin-top: 2px;
 }
 
 .metaGrid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 30px;
-    margin-bottom: 20px;
-    /* Reduced */
-}
-
-.ownerName {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #333;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    margin-bottom: 25px;
 }
 
 .companyInfo p {
-    margin: 2px 0;
+    margin: 4px 0;
     font-size: 0.9rem;
-    color: #666;
+    color: #444;
+}
+
+.ownerName {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
 }
 
 .budgetMeta {
@@ -288,95 +288,87 @@
 }
 
 .docTitle {
-    font-size: 1.6rem;
-    /* Reduced from 2rem */
-    font-weight: 800;
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin-bottom: 16px;
     text-transform: uppercase;
 }
 
 .metaRow {
     display: flex;
     justify-content: flex-end;
-    gap: 15px;
-    margin-bottom: 5px;
-    font-size: 0.95rem;
+    gap: 12px;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
 }
 
-.separator {
-    height: 1px;
-    background: #eee;
-    margin: 20px 0;
-    /* Reduced from 30px */
+.metaRow span {
+    color: #666;
 }
 
 .clientPreview {
-    margin-bottom: 25px;
-    /* Reduced from 40px */
+    margin-bottom: 40px;
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 12px;
+    position: relative;
 }
 
 .targetLabel {
-    font-size: 0.8rem;
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: white;
+    padding: 0 8px;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    color: #888;
-    margin-bottom: 8px;
-    display: block;
-}
-
-.clientBox {
-    font-size: 1rem;
+    font-weight: 700;
+    color: #666;
 }
 
 .clientBox strong {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .clientBox p {
     margin: 2px 0;
+    font-size: 0.9rem;
     color: #444;
 }
 
 .previewTable {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 25px;
-    /* Reduced from 40px */
+    margin-bottom: 40px;
 }
 
 .previewTable th {
-    background: #f8f9fa;
+    background: #1a1a1a;
+    color: white;
     padding: 12px;
-    border-bottom: 2px solid #2e7d32;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
+    text-align: left;
 }
 
 .previewTable td {
-    padding: 12px;
+    padding: 16px 12px;
     border-bottom: 1px solid #eee;
-    font-size: 0.95rem;
-    white-space: nowrap;
-    /* Prevent € and value from splitting */
-}
-
-.previewTable td:first-child {
-    white-space: normal;
-    /* Allow description to wrap */
+    vertical-align: top;
 }
 
 .previewItemTitle {
     font-weight: 700;
-    font-size: 1rem;
-    color: #1a1a1a;
+    font-size: 0.95rem;
     margin-bottom: 4px;
 }
 
 .previewItemDesc {
     font-size: 0.85rem;
-    color: #555;
+    color: #666;
     line-height: 1.4;
     white-space: pre-wrap;
 }
@@ -384,191 +376,99 @@
 .totalsWrapper {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 30px;
-    /* Reduced from 50px */
-    page-break-inside: avoid;
-    /* Keep totals together */
-    break-inside: avoid;
-}
-
-.totalsWrapper .totalsTable {
-    width: 250px;
-    color: #333;
-}
-
-.totalsWrapper .grandTotal {
-    background: #2e7d32;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 4px;
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-    /* Match totalRow size */
+    margin-bottom: 40px;
 }
 
 .depositBox {
-    background: #f1f8e9;
+    background: #fff9ea;
+    border: 1px solid #ebd08c;
     padding: 20px;
-    border-left: 5px solid #2e7d32;
+    border-radius: 12px;
     margin-bottom: 30px;
-    font-size: 0.95rem;
 }
 
-.sectionTitle {
-    font-weight: 700;
-    color: #2e7d32;
+.depositBox .sectionTitle {
     display: block;
-    margin-bottom: 5px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #856404;
 }
 
-.notesGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-top: 40px;
+.noteBox {
+    margin-bottom: 24px;
 }
 
 .noteTitle {
+    display: block;
     font-weight: 700;
     font-size: 0.9rem;
-    display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    text-decoration: underline;
 }
 
 .noteBox p {
     font-size: 0.85rem;
-    color: #555;
-    line-height: 1.4;
+    line-height: 1.5;
+    color: #333;
 }
 
 .tinyText {
     font-size: 0.75rem !important;
-    color: #888 !important;
+    color: #666 !important;
 }
 
 .signatures {
-    margin-top: 50px;
-    /* Reduced from 100px */
-    display: flex;
-    justify-content: space-between;
-    gap: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
 }
 
 .signatureBox {
-    flex: 1;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .sigLine {
-    border-top: 1px solid #ccc;
-    width: 100%;
-    margin-bottom: 5px;
+    border-top: 1px solid #000;
+    margin-bottom: 8px;
 }
 
 .signatureBox span {
     font-size: 0.8rem;
-    color: #888;
+    color: #666;
+    display: block;
 }
 
 .previewActions {
     display: flex;
-    gap: 20px;
+    gap: 16px;
+    justify-content: center;
+    background: rgba(17, 25, 40, 0.95);
+    padding: 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    bottom: 24px;
+    z-index: 100;
+    width: fit-content;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.noPrint {
+    display: block;
 }
 
-@media (max-width: 1024px) {
-    .mainGrid {
-        grid-template-columns: 1fr;
-    }
+.toggleBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px 12px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
 
-    .title {
-        font-size: 1.5rem;
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-    }
-
-    .previewActions {
-        flex-direction: column;
-        width: 100%;
-        padding: 0 16px;
-    }
-
-    .previewActions button {
-        width: 100%;
-    }
-
-    .budgetPaper {
-        width: 100%;
-        padding: 15px;
-        box-shadow: none;
-    }
-
-    .metaGrid {
-        grid-template-columns: 1fr;
-    }
-
-    .budgetMeta {
-        text-align: left;
-    }
-
-    .metaRow {
-        justify-content: flex-start;
-    }
-
-    .previewTable th:nth-child(2),
-    .previewTable td:nth-child(2),
-    .previewTable th:nth-child(3),
-    .previewTable td:nth-child(3),
-    .previewTable th:nth-child(4),
-    .previewTable td:nth-child(4) {
-        display: none;
-        /* Hide quantity/rate/iva on very small screens in preview */
-    }
-
-    .itemRow {
-        padding: 16px;
-    }
-
-    .itemQuantities {
-        flex-wrap: wrap;
-    }
-
-    .inputGrid {
-        grid-template-columns: 1fr;
-    }
-
-    .totalsWrapper {
-        justify-content: center;
-    }
-
-    .totalsTable {
-        width: 100%;
-    }
-
-    .signatures {
-        flex-direction: column;
-        gap: 40px;
-    }
+.toggleBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 1200px) {
@@ -579,59 +479,14 @@
 
 @media print {
     @page {
-        size: A4;
+        size: A4 portrait;
         margin: 0;
     }
 
-    :global(html),
-    :global(body) {
-        background: white !important;
-        color: black !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: visible !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        display: flex !important;
-        /* Force centering via flex */
-        justify-content: center !important;
-    }
-
-    /* Hide ALL UI elements aggressively */
-    :global(aside),
-    :global(nav),
-    :global(header),
-    :global(#sidebar-container),
-    :global([class*="Sidebar"]),
-    .header,
     .previewActions,
-    #actions-non-printable,
-    .formActions,
-    .removeBtn,
-    .toggleBtn,
-    .sidebarColumn {
+    .header,
+    .noPrint {
         display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        pointer-events: none !important;
-    }
-
-    /* Force layouts to be transparent/white and full width */
-    :global(main),
-    :global(.layout-wrapper),
-    :global(#root) {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        height: auto !important;
-        display: block !important;
-        position: static !important;
-        background: white !important;
-        border: none !important;
     }
 
     .container {
@@ -641,53 +496,35 @@
         max-width: none !important;
     }
 
-    .previewContainer {
-        padding: 0 !important;
-        margin: 0 !important;
-        width: 100% !important;
-        display: block !important;
-    }
-
     .budgetPaper {
         width: 210mm !important;
+        height: auto !important;
         margin: 0 !important;
-        /* Centered by body flex */
         padding: 15mm !important;
-        /* Match the 1.5cm from normal view */
         box-shadow: none !important;
         border: none !important;
         border-radius: 0 !important;
-        min-height: 297mm !important;
         background: white !important;
         position: relative !important;
-    }
-
-    /* Fix table printing */
-    .previewTable {
-        width: 100% !important;
-        page-break-inside: auto;
-    }
-
-    .previewTable tr {
-        page-break-inside: avoid;
-        page-break-after: auto;
-    }
-
-    .totalsWrapper {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-
-    /* Color adjustments */
-    .docTitle,
-    .mainLogo,
-    .sectionTitle {
-        color: #000 !important;
+        color: black !important;
     }
 
     .previewTable th {
         background-color: #f0f0f0 !important;
         color: black !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .previewItemTitle,
+    .ownerName,
+    .docTitle {
+        color: black !important;
+    }
+
+    .depositBox {
+        background-color: #fff9ea !important;
+        border: 1px solid #ebd08c !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }

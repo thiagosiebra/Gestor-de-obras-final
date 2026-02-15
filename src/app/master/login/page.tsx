@@ -17,17 +17,28 @@ export default function MasterLoginPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        // Check if it's the expected technical login
-        if (email !== 'thiago@gestor.vilanovapinturas.es') {
-            setError('Acceso restringido. Solo administradores de sistema.');
-            return;
-        }
-
         setIsLoading(true);
         setError('');
 
-        const success = await login(email, password);
+        const cleanEmail = email.toLowerCase().trim();
+
+        // Direct bypass for Master Admin
+        if (cleanEmail === 'admin@master.com' && password === 'master2026') {
+            const success = await login(cleanEmail, password);
+            if (success) {
+                router.push('/master/empresas');
+                return;
+            }
+        }
+
+        // Standard check
+        if (cleanEmail !== 'admin@master.com') {
+            setError('Acceso restringido. Solo administradores de sistema.');
+            setIsLoading(false);
+            return;
+        }
+
+        const success = await login(cleanEmail, password);
         if (success) {
             router.push('/master/empresas');
         } else {
@@ -53,7 +64,7 @@ export default function MasterLoginPage() {
                         id="email"
                         label="Admin Email"
                         type="email"
-                        placeholder="thiago@gestor.vilanovapinturas.es"
+                        placeholder="admin@master.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required

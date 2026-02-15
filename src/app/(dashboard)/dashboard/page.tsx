@@ -8,9 +8,17 @@ import TimeClock from '@/components/dashboard/TimeClock';
 import styles from './page.module.css';
 
 export default function DashboardPage() {
-    const { currentUser, works, clients, employees, requests, updateRequest, addRequest, invoices } = useApp();
-    const currentEmployee = employees.find(e => e.email === currentUser?.email);
-    const userName = currentUser?.email.split('@')[0] || 'Usuario';
+    const { currentUser, works, clients, employees, requests, updateRequest, addRequest, invoices, settings } = useApp();
+    const currentEmployee = employees.find(e => e.email?.toLowerCase().trim() === currentUser?.email?.toLowerCase().trim());
+
+    // Get name from metadata fallback
+    const metadataName = (currentUser as any)?.metadata?.full_name || (currentUser as any)?.user_metadata?.full_name;
+    const employeeFullName = currentEmployee ? `${currentEmployee.firstName} ${currentEmployee.lastName}` : null;
+
+    const userName = (currentUser?.role === 'admin' && settings.companyName)
+        ? settings.companyName
+        : (employeeFullName || metadataName || currentUser?.email.split('@')[0] || 'Usuario');
+
     const isAdmin = currentUser?.role === 'admin';
 
     // Admin Stats
@@ -110,7 +118,7 @@ export default function DashboardPage() {
                 <div className="glass-panel p-20 text-center">
                     <h1 className={styles.welcomeTitle}>⚠️ Acceso en Espera</h1>
                     <p className={styles.subtitle}>
-                        Tu cuenta (<strong>{currentUser.email}</strong>) no tiene un rol asignado ainda.
+                        Tu cuenta (<strong>{currentUser.email}</strong>) no tiene un rol asignado asignado todavía.
                     </p>
                     <p style={{ marginTop: '10px' }}>
                         Pide al administrador que te registre como colaborador para poder entrar.
@@ -124,19 +132,14 @@ export default function DashboardPage() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                {/* DEBUG INFO - REMOVE AFTER FIX */}
-                <div style={{ background: '#333', color: '#fff', padding: '5px', fontSize: '10px', marginBottom: '5px' }}>
-                    DEBUG v2.0 | Email: {currentUser?.email} | Role: {currentUser?.role} | IsAdmin: {isAdmin ? 'YES' : 'NO'}
-                </div>
-
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                     <div>
                         <h1 className={styles.welcomeTitle}>
-                            Hola, <span className="text-gradient">{userName}</span> 👋 (v2.0)
+                            Hola, <span className="text-gradient">{userName}</span> 👋
                         </h1>
                         <p className={styles.subtitle}>
                             {isAdmin
-                                ? 'Resumen ejecutivo de Vilanova Pinturas.'
+                                ? `Resumen ejecutivo de ${settings.companyName}.`
                                 : 'Panel de control operativo.'}
                         </p>
                     </div>

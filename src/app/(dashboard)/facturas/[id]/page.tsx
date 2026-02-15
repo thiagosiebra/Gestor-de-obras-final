@@ -258,7 +258,7 @@ export default function InvoiceDetailPage() {
                         <div className={styles.logoImg}>
                             <div className={styles.logoIconContainer}>🖌️</div>
                             <div className={styles.logoTextContainer}>
-                                <span className={styles.mainLogo}>VILANOVA PINTURAS</span>
+                                <span className={styles.mainLogo}>{settings.companyName.toUpperCase()}</span>
                                 <span className={styles.subLogo}>& SERVICIOS</span>
                             </div>
                         </div>

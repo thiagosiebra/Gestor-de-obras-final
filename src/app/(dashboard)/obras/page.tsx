@@ -72,7 +72,7 @@ export default function WorksPage() {
                             </div>
                             <div className={styles.infoRow}>
                                 <span>Fin Previsto:</span>
-                                <span>{new Date(work.endDate).toLocaleDateString('es-ES')}</span>
+                                <span>{work.endDate ? new Date(work.endDate).toLocaleDateString('es-ES') : 'Pendiente'}</span>
                             </div>
 
                             <div className={styles.progressWrapper}>
