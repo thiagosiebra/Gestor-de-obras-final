@@ -53,31 +53,114 @@ export default function MasterCompaniesPage() {
     useEffect(() => {
         if (!currentUser || currentUser.role !== 'super-admin') {
             router.push('/master/login');
+            return;
         }
 
-        // Initialized as empty for a fresh start
-        setCompanies([]);
+        // CARGAR EMPRESAS DESDE SUPABASE
+        const loadCompanies = async () => {
+            const { supabase } = await import('@/lib/supabase');
+            const { data, error } = await supabase
+                .from('companies')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error('Error cargando empresas:', error);
+                return;
+            }
+
+            if (data) {
+                const mappedCompanies: Company[] = data.map(c => ({
+                    id: c.id,
+                    name: c.name || '',
+                    adminEmail: c.email || '',
+                    address: c.address || '',
+                    phone: c.phone || '',
+                    nif: c.nif || '',
+                    createdAt: c.created_at?.split('T')[0] || new Date().toISOString().split('T')[0],
+                    employeeCount: 0,
+                    status: 'Activa',
+                    paymentStatus: 'Al día',
+                    nextPaymentDate: new Date().toISOString().split('T')[0],
+                    accessLogs: [],
+                    planType: 'pro',
+                    monthlyPrice: 39.90
+                }));
+                setCompanies(mappedCompanies);
+            }
+        };
+
+        loadCompanies();
     }, [currentUser, router]);
 
-    const handleSaveCompany = (e: React.FormEvent) => {
+    const handleSaveCompany = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const { supabase } = await import('@/lib/supabase');
 
         if (editingCompany) {
             // Update existing
+            const { error } = await supabase
+                .from('companies')
+                .update({
+                    name: formData.name,
+                    email: formData.adminEmail,
+                    address: formData.address,
+                    phone: formData.phone,
+                    nif: formData.nif
+                })
+                .eq('id', editingCompany.id);
+
+            if (error) {
+                console.error('Error actualizando empresa:', error);
+                alert('Error al actualizar la empresa');
+                return;
+            }
+
             setCompanies(prev => prev.map(c => c.id === editingCompany.id ? { ...c, ...formData } : c));
             setEditingCompany(null);
         } else {
-            // Add new
-            const companyToAdd: Company = {
-                id: Math.random().toString(36).substr(2, 9),
-                ...formData,
-                createdAt: new Date().toISOString().split('T')[0],
-                employeeCount: 0,
-                status: 'Activa',
-                accessLogs: []
-            };
-            setCompanies([...companies, companyToAdd]);
-            setIsAdding(false);
+            // GUARDAR EN SUPABASE
+            const { data, error } = await supabase
+                .from('companies')
+                .insert([{
+                    name: formData.name,
+                    email: formData.adminEmail,
+                    address: formData.address,
+                    phone: formData.phone,
+                    nif: formData.nif,
+                    activity_sector: '',
+                    employee_count: ''
+                }])
+                .select()
+                .single();
+
+            if (error) {
+                console.error('Error guardando empresa:', error);
+                alert('Error al guardar la empresa: ' + error.message);
+                return;
+            }
+
+            if (data) {
+                const newCompany: Company = {
+                    id: data.id,
+                    name: data.name,
+                    adminEmail: data.email,
+                    address: data.address || '',
+                    phone: data.phone || '',
+                    nif: data.nif,
+                    createdAt: data.created_at?.split('T')[0] || new Date().toISOString().split('T')[0],
+                    employeeCount: 0,
+                    status: 'Activa',
+                    paymentStatus: 'Al día',
+                    nextPaymentDate: new Date().toISOString().split('T')[0],
+                    accessLogs: [],
+                    planType: 'pro',
+                    monthlyPrice: 39.90
+                };
+                setCompanies([...companies, newCompany]);
+                setIsAdding(false);
+            }
         }
 
         // Reset form
@@ -336,3 +419,4 @@ export default function MasterCompaniesPage() {
         </div>
     );
 }
+
