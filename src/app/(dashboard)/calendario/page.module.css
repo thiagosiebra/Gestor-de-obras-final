@@ -1,0 +1,238 @@
+.container {
+    animation: fadeIn 0.4s ease-out;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.navBtn:hover {
+    opacity: 1;
+}
+
+.monthLabel {
+    font-weight: 600;
+    min-width: 150px;
+    text-align: center;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 24px;
+}
+
+.calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.weekDay {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    padding-bottom: 10px;
+}
+
+.dayCellLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.day {
+    height: 120px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.2s, border-color 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.day:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.05);
+}
+
+.dayNumber {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+.dayEmpty {
+    height: 120px;
+}
+
+.eventList {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.moreEvents {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 2px;
+}
+
+/* Alerts Column */
+.alertsColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.alertsCard {
+    padding: 24px;
+    height: 100%;
+}
+
+.alertsTitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alertsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.alertItem {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.alertIcon {
+    font-size: 1.5rem;
+}
+
+.alertContent {
+    flex: 1;
+}
+
+.alertTime {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.alertValue {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.alertDesc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.alertVisita {
+    border-left: 4px solid #f59e0b;
+}
+
+.alertVisita .alertTime {
+    color: #f59e0b;
+}
+
+.alertObra {
+    border-left: 4px solid var(--primary);
+}
+
+.alertObra .alertTime {
+    color: var(--primary);
+}
+
+.noAlerts {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.upcomingSection {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.upcomingTitle {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: var(--text-secondary);
+}
+
+.upcomingItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.9rem;
+}
+
+.upcomingDate {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1024px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}

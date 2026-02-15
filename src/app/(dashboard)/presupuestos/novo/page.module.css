@@ -1,0 +1,531 @@
+.container {
+    padding: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.mainGrid {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.sidebarColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.mainColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.card {
+    background: rgba(17, 25, 40, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 24px;
+}
+
+.cardTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cardHeaderFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cardHeaderFlex .cardTitle {
+    margin-bottom: 0;
+}
+
+.inputGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.fieldWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.select,
+.textarea,
+.modalInput,
+.modalTextarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.select option {
+    background-color: #1a2233;
+    color: #fff;
+    padding: 12px;
+}
+
+.select:focus,
+.textarea:focus {
+    border-color: var(--primary-color, #3b82f6);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.textarea {
+    min-height: 100px;
+    resize: vertical;
+    width: 100%;
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.itemRow {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.productSearchRow {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.itemQuantities {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.removeBtn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.removeBtn:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+.totalsSection {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.totalsTable {
+    width: 300px;
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+}
+
+.grandTotal {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+/* PREVIEW STYLES (A4 LOOK) */
+.previewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 60px;
+}
+
+.budgetPaper {
+    background: white;
+    width: 210mm;
+    min-height: 280mm;
+    padding: 20mm 15mm 20mm 15mm;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    color: #1a1a1a;
+    font-family: 'Inter', system-ui, sans-serif;
+    border-radius: 4px;
+    position: relative;
+}
+
+.previewHeaderLogo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.logoImg {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logoIconContainer {
+    width: 48px;
+    height: 48px;
+    background: #1a1a1a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.8rem;
+}
+
+.logoTextContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainLogo {
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.subLogo {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: #666;
+    margin-top: 2px;
+}
+
+.metaGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    margin-bottom: 25px;
+}
+
+.companyInfo p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.ownerName {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.budgetMeta {
+    text-align: right;
+}
+
+.docTitle {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.metaRow {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.metaRow span {
+    color: #666;
+}
+
+.clientPreview {
+    margin-bottom: 40px;
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 12px;
+    position: relative;
+}
+
+.targetLabel {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: white;
+    padding: 0 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #666;
+}
+
+.clientBox strong {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.clientBox p {
+    margin: 2px 0;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.previewTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+.previewTable th {
+    background: #1a1a1a;
+    color: white;
+    padding: 12px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.previewTable td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.previewItemTitle {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.previewItemDesc {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+.totalsWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.depositBox {
+    background: #fff9ea;
+    border: 1px solid #ebd08c;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.depositBox .sectionTitle {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #856404;
+}
+
+.noteBox {
+    margin-bottom: 24px;
+}
+
+.noteTitle {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    text-decoration: underline;
+}
+
+.noteBox p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+.tinyText {
+    font-size: 0.75rem !important;
+    color: #666 !important;
+}
+
+.signatures {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+}
+
+.signatureBox {
+    text-align: center;
+}
+
+.sigLine {
+    border-top: 1px solid #000;
+    margin-bottom: 8px;
+}
+
+.signatureBox span {
+    font-size: 0.8rem;
+    color: #666;
+    display: block;
+}
+
+.previewActions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    background: rgba(17, 25, 40, 0.95);
+    padding: 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    bottom: 24px;
+    z-index: 100;
+    width: fit-content;
+}
+
+.noPrint {
+    display: block;
+}
+
+.toggleBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px 12px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.toggleBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 1200px) {
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+
+    .previewActions,
+    .header,
+    .noPrint {
+        display: none !important;
+    }
+
+    .container {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    .budgetPaper {
+        width: 210mm !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 15mm !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        background: white !important;
+        position: relative !important;
+        color: black !important;
+    }
+
+    .previewTable th {
+        background-color: #f0f0f0 !important;
+        color: black !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .previewItemTitle,
+    .ownerName,
+    .docTitle {
+        color: black !important;
+    }
+
+    .depositBox {
+        background-color: #fff9ea !important;
+        border: 1px solid #ebd08c !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

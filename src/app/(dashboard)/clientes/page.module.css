@@ -1,0 +1,153 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.title {
+    font-size: 2rem;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+}
+
+.controls {
+    display: flex;
+    gap: 16px;
+}
+
+.searchWrapper {
+    width: 100%;
+    max-width: 400px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform var(--transition-fast);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    /* Square for businesses */
+    background: hsla(217, 33%, 25%, 0.8);
+    color: var(--text-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: 1px solid var(--border-subtle);
+}
+
+.name {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.contact {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.cardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 16px;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.highlight {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.status {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.activo {
+    background: hsla(142, 71%, 45%, 0.2);
+    color: #4ade80;
+}
+
+.potencial {
+    background: hsla(210, 100%, 50%, 0.2);
+    color: var(--primary-color);
+}
+
+.finalizado {
+    background: hsla(0, 0%, 50%, 0.2);
+    color: #9ca3af;
+}
+
+.actions {
+    margin-top: auto;
+}
+
+.actionBtn {
+    width: 100%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: block;
+}

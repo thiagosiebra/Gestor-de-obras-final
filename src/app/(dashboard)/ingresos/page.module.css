@@ -1,0 +1,275 @@
+.container {
+    animation: fadeIn 0.4s ease-out;
+}
+
+.header {
+    margin-bottom: 32px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.statCard {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.statIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.statInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.statInfo label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.statInfo strong {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.mainGrid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.chartSection {
+    padding: 32px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 32px;
+    color: var(--text-primary);
+}
+
+.chartContainer {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: 40px;
+    gap: 20px;
+}
+
+.barWrapper {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.bar {
+    width: 60%;
+    background: linear-gradient(to top, rgba(59, 130, 246, 0.5), #3b82f6);
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    transition: all 0.3s ease;
+    min-height: 4px;
+}
+
+.bar:hover {
+    filter: brightness(1.2);
+    transform: scaleX(1.1);
+}
+
+.barValue {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.barLabel {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.distributionSection {
+    padding: 32px;
+}
+
+.clientList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.clientRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.clientMain {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.clientName {
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.miniProgress {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    width: 100%;
+}
+
+.miniFill {
+    height: 100%;
+    background: #47a1ff;
+    border-radius: 3px;
+    transition: width 1s ease-out;
+}
+
+.clientValue {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.overdueSection {
+    padding: 32px;
+}
+
+.overdueHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.badge {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.overdueGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 16px;
+}
+
+.overdueCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.overdueInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.overdueInfo strong {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.overdueInfo span {
+    font-size: 0.85rem;
+    color: #f87171;
+}
+
+.overdueAction {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.overdueAmount {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.noOverdue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 40px;
+    color: var(--text-secondary);
+}
+
+.checkIcon {
+    font-size: 3rem;
+}
+
+.emptyText {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1100px) {
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    height: 64px;
+    padding: 28px 16px 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.input:focus {
+    border-color: #3b82f6;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    font-size: 1rem;
+    padding: 0;
+}
+
+/* Float the label higher to avoid overlap with placeholder/value */
+.input:focus~.label,
+.input:not(:placeholder-shown)~.label {
+    top: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #3b82f6;
+    transform: translateY(0);
+}
+
+/* Hide placeholder when not focused to avoid clashing with the floating label in empty state */
+.input::placeholder {
+    color: transparent;
+}
+
+.input:focus::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.error {
+    color: #ef4444;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-left: 4px;
+}
