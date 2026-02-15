@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 // URL y Anon Key de tu NUEVO proyecto (xtjmdtgxtqwipmzivlmf)
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://xtjmdtgxtqwipmzivlmf.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publicable_06I0GYY-etmb2asPx7gQSQ_GghR8aXd';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0am1kdGd4dHF3aXBteml2bG1mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwMDc5MzMsImV4cCI6MjA4NjU4MzkzM30.FXoQFHs8OVPqax2WlYfgwhSIyGq4dNoESaRiadrKrjg';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
