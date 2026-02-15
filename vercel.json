@@ -1,0 +1,7 @@
+{
+    "version": 2,
+    "env": {
+        "NEXT_PUBLIC_SUPABASE_URL": "https://xtjmdtgxtqwipmzivlmf.supabase.co",
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publicable_06I0GYY-etmb2asPx7gQSQ_GghR8aXd"
+    }
+}
