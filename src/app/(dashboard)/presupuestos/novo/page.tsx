@@ -6,12 +6,11 @@ import { useRouter } from 'next/navigation';
 import { useApp, Budget, BudgetItem, Client, Service } from '@/lib/context';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { deduplicateAddress } from '@/lib/utils';
 import styles from './page.module.css';
 
 export default function NewBudgetPage() {
     const router = useRouter();
-    const { clients, settings, addBudget, budgets, services, addClient } = useApp();
+    const { clients, settings, addBudget, budgets, services } = useApp();
     const [isLoading, setIsLoading] = useState(false);
     const [previewMode, setPreviewMode] = useState(false);
 
@@ -136,90 +135,20 @@ export default function NewBudgetPage() {
         window.location.href = `mailto:${clientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
 
-        try {
-            let finalClientId = formData.clientId;
-
-            // If it's a new client, register them first BEFORE saving budget
-            if (isNewClient && tempClient.name) {
-                finalClientId = await addClient({
-                    name: tempClient.name,
-                    email: tempClient.email,
-                    phone: tempClient.phone,
-                    address: tempClient.address,
-                    city: '',
-                    nif: tempClient.nif,
-                    contactPerson: tempClient.name,
-                    status: 'Activo'
-                });
-            }
-
-            const budgetToSaveFinal = {
-                ...budgetToSave,
-                clientId: finalClientId,
-                nonRegisteredClient: undefined // It's now a registered client
-            };
-
-            await addBudget(budgetToSaveFinal);
+        setTimeout(() => {
+            addBudget(budgetToSave);
+            setIsLoading(false);
             router.push('/presupuestos');
-        } catch (error: any) {
-            console.error('Error saving budget:', error);
-            alert(`Error al guardar el presupuesto: ${error.message || 'Error desconocido'}`);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleSharePDF = async () => {
-        const element = document.getElementById('budget-printable');
-        if (!element) return;
-
-        setIsLoading(true);
-        try {
-            const html2pdf = (await import('html2pdf.js')).default;
-            const opt = {
-                margin: [10, 10, 10, 10] as [number, number, number, number], // top, left, buttom, right in mm
-                filename: `Presupuesto_${formData.number}.pdf`,
-                image: { type: 'jpeg' as const, quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true, logging: false },
-                jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
-            };
-
-            // Generate blob
-            const pdfBlob = await html2pdf().from(element).set(opt).output('blob');
-            const file = new File([pdfBlob], `Presupuesto_${formData.number}.pdf`, { type: 'application/pdf' });
-
-            // Check for navigator.share (Mobile / Modern Browsers)
-            if (navigator.share && (navigator as any).canShare && (navigator as any).canShare({ files: [file] })) {
-                await navigator.share({
-                    files: [file],
-                    title: `Presupuesto Nº ${formData.number}`,
-                    text: `Te envío el presupuesto Nº ${formData.number} de ${settings.companyName}`
-                });
-            } else {
-                // Fallback to direct download for PC
-                const url = URL.createObjectURL(pdfBlob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `Presupuesto_${formData.number}.pdf`;
-                link.click();
-                URL.revokeObjectURL(url);
-            }
-        } catch (error) {
-            console.error('Error sharing PDF:', error);
-            alert('No se pudo generar el envío automático. Abre el diálogo de impresión y selecciona "Guardar como PDF".');
-            window.print();
-        } finally {
-            setIsLoading(false);
-        }
+        }, 1000);
     };
 
     const renderPreview = () => (
         <div className={styles.previewContainer}>
-            <div className={styles.budgetPaper} id="budget-printable">
+            <div className={styles.budgetPaper}>
                 {/* Header Logo */}
                 <div className={styles.previewHeaderLogo}>
                     {settings.logoUrl ? (
@@ -228,8 +157,8 @@ export default function NewBudgetPage() {
                         <div className={styles.logoImg}>
                             <div className={styles.logoIconContainer}>🖌️</div>
                             <div className={styles.logoTextContainer}>
-                                <span className={styles.mainLogo}>{settings.companyName.toUpperCase()}</span>
-                                <span className={styles.subLogo}>SISTEMA DE GESTIÓN</span>
+                                <span className={styles.mainLogo}>VILANOVA PINTURAS</span>
+                                <span className={styles.subLogo}>& SERVICIOS</span>
                             </div>
                         </div>
                     )}
@@ -273,7 +202,7 @@ export default function NewBudgetPage() {
                     <div className={styles.clientBox}>
                         <strong>{isNewClient ? tempClient.name : (clients.find(c => c.id === formData.clientId)?.name || 'Cliente')}</strong>
                         <p>{isNewClient ? tempClient.email : clients.find(c => c.id === formData.clientId)?.email}</p>
-                        <p>{deduplicateAddress(isNewClient ? tempClient.address : (clients.find(c => c.id === formData.clientId)?.address || ''))}</p>
+                        <p>{isNewClient ? tempClient.address : clients.find(c => c.id === formData.clientId)?.address}</p>
                         <p>{isNewClient ? tempClient.phone : clients.find(c => c.id === formData.clientId)?.phone}</p>
                         <p>NIF/CIF: {isNewClient ? tempClient.nif : clients.find(c => c.id === formData.clientId)?.nif}</p>
                     </div>
@@ -379,13 +308,11 @@ export default function NewBudgetPage() {
             <div className={styles.previewActions} id="actions-non-printable">
                 <Button onClick={() => setPreviewMode(false)} variant="secondary">✏️ Editar Datos</Button>
                 <div style={{ display: 'flex', gap: '10px' }}>
-                    <Button onClick={handleSharePDF} variant="secondary" style={{ backgroundColor: '#3b82f6', color: 'white', border: 'none' }} isLoading={isLoading}>
-                        📤 Enviar PDF / Compartir
-                    </Button>
-                    <Button onClick={handleShareWhatsApp} variant="secondary" style={{ backgroundColor: '#25D366', color: 'white', border: 'none' }}>🟢 WhatsApp</Button>
+                    <Button onClick={handlePrint} variant="secondary">🖨️ Imprimir / PDF</Button>
+                    <Button onClick={handleShareWhatsApp} variant="secondary" style={{ backgroundColor: '#25D366', color: 'white', border: 'none' }}>📱 WhatsApp</Button>
                     <Button onClick={handleShareEmail} variant="secondary">📧 Email</Button>
                 </div>
-                <Button onClick={handleSubmit} isLoading={isLoading}>✅ Finalizar y Guardar</Button>
+                <Button onClick={handleSubmit} isLoading={isLoading}>Guardar Finalizar</Button>
             </div>
         </div>
     );

@@ -158,24 +158,11 @@ export default function WorkDetailsPage() {
 
     const handleUpdateTask = (taskId: string, data: Partial<any>) => {
         const updatedTasks = work.tasks.map(t => t.id === taskId ? { ...t, ...data } : t);
-
-        // Calculate automatic progress
-        const total = updatedTasks.length;
-        const completed = updatedTasks.filter(t => t.status === 'Completada' || t.status === 'Validada').length;
-        const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
-
-        updateWork(work.id, {
-            tasks: updatedTasks,
-            progress: progress,
-            // If at least one task is in progress, the work should be "En Progreso"
-            status: (work.status === 'Pendiente' && updatedTasks.some(t => t.status === 'En Progreso' || t.status === 'Completada'))
-                ? 'En Progreso'
-                : work.status
-        });
+        updateWork(work.id, { tasks: updatedTasks });
     };
 
     const handleTaskPhoto = (taskId: string, type: 'before' | 'progress' | 'after', source: 'camera' | 'gallery') => {
-        const legend = prompt('Añada una leyenda para esta foto (ej: Inicio de habitación, reparación de zócalo...):') || '';
+        const legend = prompt('Añada uma legenda para esta foto (ex: Inicio de habitacion, reparo de socalo...):') || '';
 
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
@@ -207,7 +194,7 @@ export default function WorkDetailsPage() {
     };
 
     const handleAddPhoto = (source: 'camera' | 'gallery') => {
-        const legend = prompt('Añada una leyenda para esta foto (ej: Vista inicial, detalle de acabado...):') || '';
+        const legend = prompt('Añada uma legenda para esta foto (ex: Vista inicial, detalle de acabado...):') || '';
         const typeStr = prompt('Tipo de foto: antes, progreso, después', 'antes');
         if (!typeStr) return;
         const normalizedType = typeStr === 'antes' ? 'before' : typeStr === 'progreso' ? 'progress' : 'after';
@@ -728,7 +715,7 @@ export default function WorkDetailsPage() {
                                 </div>
                             ))}
                             {work.assignedEmployees?.length === 0 && (
-                                <p style={{ fontSize: '13px', opacity: 0.5, textAlign: 'center' }}>Nadie asignado todavía</p>
+                                <p style={{ fontSize: '13px', opacity: 0.5, textAlign: 'center' }}>Ninguém atribuído ainda</p>
                             )}
                         </div>
                     </div>
@@ -781,7 +768,7 @@ export default function WorkDetailsPage() {
                                         className={styles.pBtn}
                                         onClick={() => updateWork(work.id, { paidAmount: Math.round(work.totalBudget * 0.5), paymentStatus: 'Señal Pagada' })}
                                     >
-                                        Señal (50%)
+                                        Sinal (50%)
                                     </button>
                                     <button
                                         className={styles.pBtn}

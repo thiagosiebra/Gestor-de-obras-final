@@ -13,10 +13,6 @@
 }
 
 @media print {
-    .wrapper :global(#sidebar-container) {
-        display: none !important;
-    }
-
     .wrapper {
         display: block !important;
     }

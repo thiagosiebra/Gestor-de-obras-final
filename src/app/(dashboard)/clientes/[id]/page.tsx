@@ -6,7 +6,6 @@ import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { useApp } from '@/lib/context';
-import { deduplicateAddress } from '@/lib/utils';
 import styles from './page.module.css';
 
 export default function ClientDetailsPage() {
@@ -129,20 +128,17 @@ export default function ClientDetailsPage() {
                                             const valLower = val.toLowerCase();
                                             let suggestions: string[] = [];
 
-                                            const naronSuffix = '15570 Narón, A Coruña, España';
-                                            const corunaSuffix = 'A Coruña, España';
-
                                             // Handle A Coruña and nearby areas specifically
                                             if (valLower.includes('coru') || valLower.includes('coruña') || valLower.includes('naron') || valLower.includes('ferrol')) {
                                                 if (valLower.includes('naron')) {
                                                     suggestions = [
-                                                        valLower.includes('naron') && valLower.includes('15570') ? val : `${val}, ${naronSuffix}`,
-                                                        `Rúa da Finca Federico, 6, ${naronSuffix}`,
+                                                        `${val}, 15570 Narón, A Coruña, España`,
+                                                        `Rúa da Finca Federico, 6, 15570 Narón, A Coruña, España`,
                                                         `Estrada de Castela, Narón, A Coruña, España`
                                                     ];
                                                 } else {
                                                     suggestions = [
-                                                        valLower.includes('coruña') && valLower.includes('españa') ? val : `${val}, ${corunaSuffix}`,
+                                                        `${val}, A Coruña, España`,
                                                         `Rúa de San Andrés, 15003 A Coruña, España`,
                                                         `Paseo Marítimo, 15002 A Coruña, España`,
                                                         `Avenida de la Marina, 15001 A Coruña, España`
@@ -150,10 +146,10 @@ export default function ClientDetailsPage() {
                                                 }
                                             } else {
                                                 suggestions = [
-                                                    val.includes('España') ? val : `${val}, España`,
                                                     `${val}, A Coruña, España`,
                                                     `${val}, Madrid, España`,
-                                                    `${val}, Barcelona, España`
+                                                    `${val}, Barcelona, España`,
+                                                    `${val}, Valencia, España`
                                                 ];
                                             }
                                             setAddressSuggestions(suggestions.slice(0, 4));
@@ -186,7 +182,7 @@ export default function ClientDetailsPage() {
                                                             cityFound = parts[parts.length - 2];
                                                         }
                                                     }
-                                                    setFormData({ ...formData, address: deduplicateAddress(s), city: cityFound });
+                                                    setFormData({ ...formData, address: s, city: cityFound });
                                                     setAddressSuggestions([]);
                                                 }}
                                                 style={{

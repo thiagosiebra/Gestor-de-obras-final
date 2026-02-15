@@ -14,12 +14,7 @@ export default function Home() {
           <span className={styles.logoText}>GESTOR DE OBRAS</span>
         </div>
         <div className={styles.navLinks}>
-          <Link href="/login" className={styles.loginLink}>Acceso Usuario</Link>
-          <Link href="/register">
-            <button className={styles.employeeButtonSmall}>
-              Registro Colaborador
-            </button>
-          </Link>
+          <Link href="/login" className={styles.loginLink}>Login Empresa</Link>
           <Link href="/master/login">
             <button className={styles.masterButtonSmall}>
               Admin Master
@@ -37,14 +32,11 @@ export default function Home() {
         </h1>
         <p className={styles.subtitle}>
           Deja de perseguir prestadores y perder dinero en materiales.
-          El primer sistema diseñado por quien vive la obra el 100% del día.
+          El primer sistema diseñado por quem vive obra 100% do dia.
         </p>
         <div className={styles.ctaGroup}>
           <Link href="/login">
-            <button className={styles.ctaButton}>Acesso Empresa</button>
-          </Link>
-          <Link href="/login">
-            <button className={`${styles.ctaButton} ${styles.employeeButton}`}>Acesso Empleado</button>
+            <button className={styles.ctaButton}>Login Empresa</button>
           </Link>
           <Link href="/master/login">
             <button className={`${styles.ctaButton} ${styles.masterButton}`}>Acesso Admin Master</button>
@@ -74,7 +66,7 @@ export default function Home() {
             </ul>
           </div>
           <div className={`${styles.compareCard} ${styles.good}`}>
-            <div className={styles.compareHeader}>✅ El "Efecto" de Gestión Eficiente</div>
+            <div className={styles.compareHeader}>✅ El "Efecto" Vilanova Pinturas</div>
             <ul className={styles.compareList}>
               <li>🚀 <strong>Fichaje Fotográfico:</strong> Cada tarea requiere prueba visual. Sin foto, no hay validación.</li>
               <li>🚀 <strong>Game-Changing Rewards:</strong> Sistema de puntos que los empleados aman y que acelera la entrega.</li>
@@ -99,63 +91,10 @@ export default function Home() {
             <li>📸 Reportan gastos y tickets con una simple foto.</li>
             <li>🏆 Participan en el Ranking semanal de eficiencia.</li>
           </ul>
-          <Button className={styles.whyButton} onClick={() => window.location.href = '/register'}>Registro de Colaborador</Button>
+          <Button className={styles.whyButton} onClick={() => window.location.href = '/login'}>Ver App de Empleados</Button>
         </div>
         <div className={styles.whyImage}>
           <img src="/landing_worker.png" alt="Worker Mobile App" className={styles.featureImage} />
-        </div>
-      </section>
-
-      {/* Pricing Section - THE FIX */}
-      <section id="pricing" className={styles.pricing}>
-        <div className={styles.pricingHeader}>
-          <span className={styles.sectionLabel}>Inversión Inteligente</span>
-          <h2 className={styles.sectionTitle}>Planes que se adaptan a tu ritmo</h2>
-        </div>
-
-        <div className={styles.pricingGrid}>
-          {/* Plan Básico */}
-          <div className={styles.priceCard}>
-            <h3 className={styles.planName}>Plan Autónomo</h3>
-            <div className={styles.planPrice}>19,90€<span>/mes</span></div>
-            <p className={styles.planDesc}>Perfecto para profesionales independientes que buscan organización.</p>
-            <ul className={styles.featureList}>
-              <li><span className={styles.checkIcon}>✓</span> Hasta 3 colaboradores</li>
-              <li><span className={styles.checkIcon}>✓</span> Presupuestos y Facturas</li>
-              <li><span className={styles.checkIcon}>✓</span> Fichaje con Foto y GPS</li>
-              <li><span className={styles.checkIcon}>✓</span> Control de Obras Ilimitado</li>
-            </ul>
-            <button className={styles.planButton} onClick={() => window.location.href = '/register-company?plan=autonomo'}>Empezar Ahora</button>
-          </div>
-
-          {/* Plan Pro */}
-          <div className={`${styles.priceCard} ${styles.popular}`}>
-            <div className={styles.popularBadge}>MÁS ELEGIDO</div>
-            <h3 className={styles.planName}>Plan Empresa Pro</h3>
-            <div className={styles.planPrice}>39,90€<span>/mes</span></div>
-            <p className={styles.planDesc}>Diseñado para escalar tu empresa y motivar a tu equipo al máximo.</p>
-            <ul className={styles.featureList}>
-              <li><span className={styles.checkIcon}>✓</span> <strong>Hasta 10 colaboradores</strong></li>
-              <li><span className={styles.checkIcon}>✓</span> Sistema de Puntos y Premios</li>
-              <li><span className={styles.checkIcon}>✓</span> Facturación Automática</li>
-              <li><span className={styles.checkIcon}>✓</span> Soporte prioritario WhatsApp</li>
-            </ul>
-            <button className={styles.planButton} onClick={() => window.location.href = '/register-company?plan=pro'}>Elegir Plan Pro</button>
-          </div>
-
-          {/* Plan Enterprise */}
-          <div className={styles.priceCard}>
-            <h3 className={styles.planName}>Plan Enterprise</h3>
-            <div className={styles.planPrice}>99,90€<span>/mes</span></div>
-            <p className={styles.planDesc}>Control total y personalización para grandes constructoras.</p>
-            <ul className={styles.featureList}>
-              <li><span className={styles.checkIcon}>✓</span> <strong>Colaboradores Ilimitados</strong></li>
-              <li><span className={styles.checkIcon}>✓</span> Exportación masiva de datos</li>
-              <li><span className={styles.checkIcon}>✓</span> Panel Multi-Empresa</li>
-              <li><span className={styles.checkIcon}>✓</span> Consultoría trimestral</li>
-            </ul>
-            <button className={styles.planButton} onClick={() => window.location.href = '/register-company?plan=enterprise'}>Contactar Ventas</button>
-          </div>
         </div>
       </section>
 

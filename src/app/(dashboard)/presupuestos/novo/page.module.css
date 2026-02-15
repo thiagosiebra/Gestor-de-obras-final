@@ -1,8 +1,5 @@
 .container {
-    padding: 32px;
-    max-width: 1400px;
-    margin: 0 auto;
-    min-height: 100vh;
+    animation: fadeIn 0.4s ease-out;
 }
 
 .header {
@@ -13,17 +10,19 @@
 }
 
 .title {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin: 0;
-    letter-spacing: -0.02em;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .mainGrid {
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 350px 1fr;
     gap: 32px;
-    align-items: start;
 }
 
 .sidebarColumn {
@@ -39,21 +38,14 @@
 }
 
 .card {
-    background: rgba(17, 25, 40, 0.75);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
     padding: 24px;
 }
 
 .cardTitle {
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 20px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    color: var(--text-primary);
 }
 
 .cardHeaderFlex {
@@ -67,6 +59,17 @@
     margin-bottom: 0;
 }
 
+.toggleBtn {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
 .inputGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -76,123 +79,112 @@
 .fieldWrapper {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .label {
     font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    color: var(--text-secondary);
 }
 
 .select,
-.textarea,
-.modalInput,
-.modalTextarea {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 14px 16px;
-    color: #fff;
-    font-size: 1rem;
-    outline: none;
-    transition: all 0.2s;
-    width: 100%;
-}
-
-.select option {
-    background-color: #1a2233;
-    color: #fff;
+.textarea {
     padding: 12px;
-}
-
-.select:focus,
-.textarea:focus {
-    border-color: var(--primary-color, #3b82f6);
-    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    color: white;
+    border: 1px solid var(--border-subtle);
+    font-size: 1rem;
+    transition: all 0.2s;
 }
 
 .textarea {
     min-height: 100px;
     resize: vertical;
     width: 100%;
-}
-
-.itemsList {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    font-family: inherit;
 }
 
 .itemRow {
     background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
     padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 16px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 16px;
+    position: relative;
+    border: 1px solid var(--border-subtle);
 }
 
 .productSearchRow {
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--border-subtle);
+}
+
+.itemMain {
+    flex: 1;
 }
 
 .itemQuantities {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
-    gap: 16px;
+    display: flex;
+    gap: 12px;
     align-items: flex-end;
 }
 
 .removeBtn {
     background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
+    color: #f87171;
     border: none;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     transition: all 0.2s;
 }
 
 .removeBtn:hover {
     background: #ef4444;
-    color: #fff;
+    color: white;
 }
 
 .totalsSection {
     margin-top: 32px;
     padding-top: 24px;
-    border-top: 2px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--border-subtle);
     display: flex;
     justify-content: flex-end;
 }
 
 .totalsTable {
     width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .totalRow {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
-    color: rgba(255, 255, 255, 0.7);
+    align-items: center;
+    /* Vertical centering */
     font-size: 1rem;
 }
 
 .grandTotal {
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
+    font-size: 1.2rem;
+    /* Reduced from 1.5rem */
     font-weight: 800;
-    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .formActions {
@@ -201,49 +193,52 @@
     margin-top: 24px;
 }
 
-/* PREVIEW STYLES (A4 LOOK) */
+/* PREVIEW MODE STYLES */
 .previewContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding-bottom: 60px;
+    gap: 40px;
+    padding-bottom: 100px;
 }
 
 .budgetPaper {
-    background: white;
     width: 210mm;
-    min-height: 280mm;
-    padding: 20mm 15mm 20mm 15mm;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    min-height: 297mm;
+    background: white;
     color: #1a1a1a;
-    font-family: 'Inter', system-ui, sans-serif;
+    padding: 1.5cm;
+    /* Reduced from 2.5cm */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     border-radius: 4px;
+    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     position: relative;
 }
 
 .previewHeaderLogo {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 25px;
+    /* Reduced from 40px */
 }
 
 .logoImg {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
+}
+
+.logoImgPreview {
+    max-height: 120px;
+    /* Reduced from 180px */
+    max-width: 100%;
+    object-fit: contain;
 }
 
 .logoIconContainer {
-    width: 48px;
-    height: 48px;
-    background: #1a1a1a;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    font-size: 1.8rem;
+    font-size: 4rem;
+    /* Reduced from 6rem */
+    color: #2e7d32;
 }
 
 .logoTextContainer {
@@ -252,35 +247,40 @@
 }
 
 .mainLogo {
-    font-size: 1.4rem;
-    font-weight: 900;
-    line-height: 1;
+    font-size: 2.5rem;
+    /* Reduced from 3.5rem */
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #1b5e20;
 }
 
 .subLogo {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    color: #666;
-    margin-top: 2px;
+    font-size: 1.4rem;
+    /* Reduced from 1.8rem */
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: #757575;
 }
 
 .metaGrid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 40px;
-    margin-bottom: 25px;
-}
-
-.companyInfo p {
-    margin: 4px 0;
-    font-size: 0.9rem;
-    color: #444;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+    margin-bottom: 20px;
+    /* Reduced */
 }
 
 .ownerName {
-    font-size: 1.2rem;
-    font-weight: 800;
+    font-size: 1.5rem;
+    font-weight: 700;
     margin-bottom: 8px;
+    color: #333;
+}
+
+.companyInfo p {
+    margin: 2px 0;
+    font-size: 0.9rem;
+    color: #666;
 }
 
 .budgetMeta {
@@ -288,87 +288,95 @@
 }
 
 .docTitle {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #1a1a1a;
-    margin-bottom: 16px;
+    font-size: 1.6rem;
+    /* Reduced from 2rem */
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 10px;
     text-transform: uppercase;
 }
 
 .metaRow {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    margin-bottom: 4px;
-    font-size: 0.9rem;
+    gap: 15px;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
 }
 
-.metaRow span {
-    color: #666;
+.separator {
+    height: 1px;
+    background: #eee;
+    margin: 20px 0;
+    /* Reduced from 30px */
 }
 
 .clientPreview {
-    margin-bottom: 40px;
-    background: #f8fafc;
-    padding: 24px;
-    border-radius: 12px;
-    position: relative;
+    margin-bottom: 25px;
+    /* Reduced from 40px */
 }
 
 .targetLabel {
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    background: white;
-    padding: 0 8px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    font-weight: 700;
-    color: #666;
+    color: #888;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.clientBox {
+    font-size: 1rem;
 }
 
 .clientBox strong {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
 }
 
 .clientBox p {
     margin: 2px 0;
-    font-size: 0.9rem;
     color: #444;
 }
 
 .previewTable {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
+    /* Reduced from 40px */
 }
 
 .previewTable th {
-    background: #1a1a1a;
-    color: white;
+    background: #f8f9fa;
     padding: 12px;
-    font-size: 0.8rem;
+    border-bottom: 2px solid #2e7d32;
+    font-size: 0.9rem;
     text-transform: uppercase;
-    text-align: left;
 }
 
 .previewTable td {
-    padding: 16px 12px;
+    padding: 12px;
     border-bottom: 1px solid #eee;
-    vertical-align: top;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    /* Prevent € and value from splitting */
+}
+
+.previewTable td:first-child {
+    white-space: normal;
+    /* Allow description to wrap */
 }
 
 .previewItemTitle {
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    color: #1a1a1a;
     margin-bottom: 4px;
 }
 
 .previewItemDesc {
     font-size: 0.85rem;
-    color: #666;
+    color: #555;
     line-height: 1.4;
     white-space: pre-wrap;
 }
@@ -376,99 +384,191 @@
 .totalsWrapper {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    /* Reduced from 50px */
+    page-break-inside: avoid;
+    /* Keep totals together */
+    break-inside: avoid;
+}
+
+.totalsWrapper .totalsTable {
+    width: 250px;
+    color: #333;
+}
+
+.totalsWrapper .grandTotal {
+    background: #2e7d32;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    /* Match totalRow size */
 }
 
 .depositBox {
-    background: #fff9ea;
-    border: 1px solid #ebd08c;
+    background: #f1f8e9;
     padding: 20px;
-    border-radius: 12px;
+    border-left: 5px solid #2e7d32;
     margin-bottom: 30px;
+    font-size: 0.95rem;
 }
 
-.depositBox .sectionTitle {
-    display: block;
+.sectionTitle {
     font-weight: 700;
-    margin-bottom: 8px;
-    color: #856404;
+    color: #2e7d32;
+    display: block;
+    margin-bottom: 5px;
 }
 
-.noteBox {
-    margin-bottom: 24px;
+.notesGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
 }
 
 .noteTitle {
-    display: block;
     font-weight: 700;
     font-size: 0.9rem;
-    margin-bottom: 8px;
-    text-decoration: underline;
+    display: block;
+    margin-bottom: 5px;
 }
 
 .noteBox p {
     font-size: 0.85rem;
-    line-height: 1.5;
-    color: #333;
+    color: #555;
+    line-height: 1.4;
 }
 
 .tinyText {
     font-size: 0.75rem !important;
-    color: #666 !important;
+    color: #888 !important;
 }
 
 .signatures {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    margin-top: 60px;
+    margin-top: 50px;
+    /* Reduced from 100px */
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
 }
 
 .signatureBox {
+    flex: 1;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .sigLine {
-    border-top: 1px solid #000;
-    margin-bottom: 8px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 .signatureBox span {
     font-size: 0.8rem;
-    color: #666;
-    display: block;
+    color: #888;
 }
 
 .previewActions {
     display: flex;
-    gap: 16px;
-    justify-content: center;
-    background: rgba(17, 25, 40, 0.95);
-    padding: 20px;
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: sticky;
-    bottom: 24px;
-    z-index: 100;
-    width: fit-content;
+    gap: 20px;
 }
 
-.noPrint {
-    display: block;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.toggleBtn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 6px 12px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
+@media (max-width: 1024px) {
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
 
-.toggleBtn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .previewActions {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 16px;
+    }
+
+    .previewActions button {
+        width: 100%;
+    }
+
+    .budgetPaper {
+        width: 100%;
+        padding: 15px;
+        box-shadow: none;
+    }
+
+    .metaGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .budgetMeta {
+        text-align: left;
+    }
+
+    .metaRow {
+        justify-content: flex-start;
+    }
+
+    .previewTable th:nth-child(2),
+    .previewTable td:nth-child(2),
+    .previewTable th:nth-child(3),
+    .previewTable td:nth-child(3),
+    .previewTable th:nth-child(4),
+    .previewTable td:nth-child(4) {
+        display: none;
+        /* Hide quantity/rate/iva on very small screens in preview */
+    }
+
+    .itemRow {
+        padding: 16px;
+    }
+
+    .itemQuantities {
+        flex-wrap: wrap;
+    }
+
+    .inputGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .totalsWrapper {
+        justify-content: center;
+    }
+
+    .totalsTable {
+        width: 100%;
+    }
+
+    .signatures {
+        flex-direction: column;
+        gap: 40px;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -479,14 +579,59 @@
 
 @media print {
     @page {
-        size: A4 portrait;
+        size: A4;
         margin: 0;
     }
 
-    .previewActions,
+    :global(html),
+    :global(body) {
+        background: white !important;
+        color: black !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        display: flex !important;
+        /* Force centering via flex */
+        justify-content: center !important;
+    }
+
+    /* Hide ALL UI elements aggressively */
+    :global(aside),
+    :global(nav),
+    :global(header),
+    :global(#sidebar-container),
+    :global([class*="Sidebar"]),
     .header,
-    .noPrint {
+    .previewActions,
+    #actions-non-printable,
+    .formActions,
+    .removeBtn,
+    .toggleBtn,
+    .sidebarColumn {
         display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* Force layouts to be transparent/white and full width */
+    :global(main),
+    :global(.layout-wrapper),
+    :global(#root) {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        position: static !important;
+        background: white !important;
+        border: none !important;
     }
 
     .container {
@@ -496,35 +641,53 @@
         max-width: none !important;
     }
 
+    .previewContainer {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
     .budgetPaper {
         width: 210mm !important;
-        height: auto !important;
         margin: 0 !important;
+        /* Centered by body flex */
         padding: 15mm !important;
+        /* Match the 1.5cm from normal view */
         box-shadow: none !important;
         border: none !important;
         border-radius: 0 !important;
+        min-height: 297mm !important;
         background: white !important;
         position: relative !important;
-        color: black !important;
+    }
+
+    /* Fix table printing */
+    .previewTable {
+        width: 100% !important;
+        page-break-inside: auto;
+    }
+
+    .previewTable tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    .totalsWrapper {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* Color adjustments */
+    .docTitle,
+    .mainLogo,
+    .sectionTitle {
+        color: #000 !important;
     }
 
     .previewTable th {
         background-color: #f0f0f0 !important;
         color: black !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-
-    .previewItemTitle,
-    .ownerName,
-    .docTitle {
-        color: black !important;
-    }
-
-    .depositBox {
-        background-color: #fff9ea !important;
-        border: 1px solid #ebd08c !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }

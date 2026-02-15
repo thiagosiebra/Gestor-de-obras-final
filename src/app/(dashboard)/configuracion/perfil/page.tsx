@@ -7,20 +7,15 @@ import { Input } from '@/components/ui/Input';
 import styles from './page.module.css';
 
 export default function ProfilePage() {
-    const { currentUser, settings, updateSettings, employees, updateEmployee } = useApp();
-    const currentEmployee = employees.find(e => e.email === currentUser?.email);
+    const { currentUser, settings, updateSettings } = useApp();
     const [isLoading, setIsLoading] = useState(false);
     const [msg, setMsg] = useState<{ type: 'success' | 'error', text: string } | null>(null);
-
-    // Initial photo based on role
-    const initialPhoto = currentUser?.role === 'admin' ? settings.logoUrl : currentEmployee?.photoUrl;
 
     // State for common profile data
     const [formData, setFormData] = useState({
         name: currentUser?.email?.split('@')[0] || 'Usuario',
         email: currentUser?.email || '',
         phone: settings.phone || '',
-        photoUrl: initialPhoto || '',
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''
@@ -44,52 +39,29 @@ export default function ProfilePage() {
         setIsLoading(true);
         setMsg(null);
 
-        try {
+        // Simulate API call
+        setTimeout(() => {
+            setIsLoading(false);
             if (formData.newPassword && formData.newPassword !== formData.confirmPassword) {
                 setMsg({ type: 'error', text: 'Las contraseñas no coinciden.' });
-                setIsLoading(false);
                 return;
             }
 
             // Update app context settings
             if (currentUser?.role === 'admin') {
-                await updateSettings({
+                updateSettings({
                     phone: formData.phone,
                     companyName: businessData.companyName,
                     nif: businessData.nif,
                     address: businessData.address,
                     activitySector: businessData.activitySector,
-                    currency: businessData.currency,
-                    logoUrl: formData.photoUrl
-                });
-            } else if (currentEmployee) {
-                await updateEmployee(currentEmployee.id, {
-                    phone: formData.phone,
-                    firstName: formData.name.split(' ')[0] || '',
-                    lastName: formData.name.split(' ').slice(1).join(' ') || '',
-                    photoUrl: formData.photoUrl
+                    currency: businessData.currency
                 });
             }
 
             setMsg({ type: 'success', text: 'Perfil y configuración actualizados correctamente.' });
             setFormData(prev => ({ ...prev, currentPassword: '', newPassword: '', confirmPassword: '' }));
-        } catch (error) {
-            console.error('Error saving profile:', error);
-            setMsg({ type: 'error', text: 'Error al guardar los cambios. Inténtelo de nuevo.' });
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFormData(prev => ({ ...prev, photoUrl: reader.result as string }));
-            };
-            reader.readAsDataURL(file);
-        }
+        }, 1000);
     };
 
     return (
@@ -101,26 +73,14 @@ export default function ProfilePage() {
 
             <div className={`glass-panel ${styles.profileCard}`}>
                 <div className={styles.avatarSection}>
-                    <div className={styles.avatar} onClick={() => document.getElementById('photoInput')?.click()} style={{ cursor: 'pointer', overflow: 'hidden' }}>
-                        {formData.photoUrl ? (
-                            <img src={formData.photoUrl} alt="Foto Perfil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        ) : (
-                            getInitials(currentUser?.email || 'User')
-                        )}
-                        <input
-                            id="photoInput"
-                            type="file"
-                            accept="image/*"
-                            onChange={handlePhotoChange}
-                            style={{ display: 'none' }}
-                        />
+                    <div className={styles.avatar}>
+                        {getInitials(currentUser?.email || 'User')}
                     </div>
                     <div className={styles.avatarInfo}>
                         <h2>{formData.name}</h2>
                         <span className={styles.roleBadge}>
-                            {currentUser?.role === 'admin' ? '🛡️ Administrador' : '👷 Colaborador'}
+                            {currentUser?.role === 'admin' ? 'Administrador' : 'Colaborador'}
                         </span>
-                        <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>Haz clic en el avatar para cambiar la foto</p>
                     </div>
                 </div>
 

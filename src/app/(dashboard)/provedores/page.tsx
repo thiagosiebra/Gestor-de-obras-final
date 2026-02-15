@@ -5,7 +5,7 @@ import { useApp, Provider } from '@/lib/context';
 import { Button } from '@/components/ui/Button';
 import styles from './page.module.css';
 
-export default function ProveedoresPage() {
+export default function ProvidersPage() {
     const { providers, addProvider, updateProvider, deleteProvider } = useApp();
     const [isEditing, setIsEditing] = useState<string | null>(null);
     const [showForm, setShowForm] = useState(false);
@@ -40,19 +40,19 @@ export default function ProveedoresPage() {
         <div className={styles.container}>
             <header className={styles.header}>
                 <div>
-                    <h1 className={styles.title}>🏭 Proveedores</h1>
-                    <p className={styles.subtitle}>Gestión de proveedores y socios de negocio.</p>
+                    <h1 className={styles.title}>🏭 Provedores</h1>
+                    <p className={styles.subtitle}>Gestão de fornecedores e parceiros de negócio.</p>
                 </div>
-                <Button onClick={() => { setShowForm(true); setIsEditing(null); }}>+ Nuevo Proveedor</Button>
+                <Button onClick={() => { setShowForm(true); setIsEditing(null); }}>+ Novo Provedor</Button>
             </header>
 
             {showForm && (
                 <div className={`${styles.formCard} glass-panel`}>
-                    <h2 className={styles.sectionTitle}>{isEditing ? 'Editar Proveedor' : 'Nuevo Proveedor'}</h2>
+                    <h2 className={styles.sectionTitle}>{isEditing ? 'Editar Provedor' : 'Novo Provedor'}</h2>
                     <form onSubmit={handleSubmit} className={styles.formGrid}>
                         <div className={styles.formGroup}>
                             <label>Nombre / Razón Social</label>
-                            <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Ej: Materiales Express SL" />
+                            <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Ej: Pinturas Vilanova SL" />
                         </div>
                         <div className={styles.formGroup}>
                             <label>CIF / NIF</label>
@@ -82,7 +82,7 @@ export default function ProveedoresPage() {
                         </div>
                         <div className={styles.formActions}>
                             <Button type="button" variant="secondary" onClick={() => setShowForm(false)}>Cancelar</Button>
-                            <Button type="submit">{isEditing ? 'Guardar Cambios' : 'Registrar Proveedor'}</Button>
+                            <Button type="submit">{isEditing ? 'Guardar Cambios' : 'Registrar Provedor'}</Button>
                         </div>
                     </form>
                 </div>
@@ -92,7 +92,7 @@ export default function ProveedoresPage() {
                 <table className={styles.table}>
                     <thead>
                         <tr>
-                            <th>Proveedor</th>
+                            <th>Provedor</th>
                             <th>Categoría</th>
                             <th>Contacto</th>
                             <th>Acciones</th>

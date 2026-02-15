@@ -23,8 +23,8 @@ export default function Sidebar() {
         { label: 'Ingresos', path: '/ingresos', icon: '📈', roles: ['admin'] },
         { label: 'Obras', path: '/obras', icon: '🏗️', roles: ['admin', 'employee'] },
         { label: 'Stock', path: '/inventario', icon: '📦', roles: ['admin'] },
-        { label: 'Proveedores', path: '/provedores', icon: '🏭', roles: ['admin'] },
-        { label: 'Costes y Finanzas', path: '/finanzas', icon: '📉', roles: ['admin'] },
+        { label: 'Provedores', path: '/provedores', icon: '🏭', roles: ['admin'] },
+        { label: 'Costo y Finanzas', path: '/finanzas', icon: '📉', roles: ['admin'] },
         { label: 'Calendario', path: '/calendario', icon: '📅', roles: ['admin', 'employee'] },
         { label: 'Recompensas', path: '/recompensas', icon: '🏆', roles: ['employee'] },
         { label: 'Empresas', path: '/master/empresas', icon: '🏢', roles: ['super-admin'] },
@@ -63,7 +63,7 @@ export default function Sidebar() {
                 <nav className={styles.nav}>
                     {userRole === 'unassigned' && (
                         <div className={styles.unassignedWarning}>
-                            ⚠️ Acceso restringido. Por favor, contacte con el administrador para asignar su cuenta a un perfil.
+                            ⚠️ Acceso restringido. Por favor, contacte con el administrador para que asigne su cuenta a un perfil de empleado.
                         </div>
                     )}
                     {menuItems.filter(item => item.roles.includes(userRole as any)).map((item) => (
@@ -89,9 +89,9 @@ export default function Sidebar() {
                             </span>
                         </div>
                     </div>
-                    <button onClick={handleLogout} className={styles.logoutBtn} title="Cerrar sesión">
+                    <button onClick={handleLogout} className={styles.logoutBtn} title="Cerrar Sesión">
                         <span className={styles.icon}>🚪</span>
-                        <span className={styles.logoutText}>Cerrar sesión</span>
+                        <span className={styles.logoutText}>Cerrar Sesión</span>
                     </button>
                 </div>
             </aside>
